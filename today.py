@@ -40,9 +40,13 @@ def graphql(query: str, variables: dict | None = None) -> dict:
 
 def fetch_stats() -> dict:
     """Fetch repos, stars, commits, and language breakdown."""
+    from datetime import datetime
+
+    # Get repos, stars, languages, and account creation date
     query = """
     query($login: String!) {
         user(login: $login) {
+            createdAt
             repositories(first: 100, ownerAffiliations: OWNER, privacy: PUBLIC) {
                 totalCount
                 nodes {
@@ -55,10 +59,6 @@ def fetch_stats() -> dict:
                     }
                 }
             }
-            contributionsCollection {
-                totalCommitContributions
-                restrictedContributionsCount
-            }
         }
     }
     """
@@ -69,12 +69,35 @@ def fetch_stats() -> dict:
     # Count stars
     total_stars = sum(r["stargazerCount"] for r in repos["nodes"])
 
-    # Count commits
-    contribs = user["contributionsCollection"]
-    total_commits = (
-        contribs["totalCommitContributions"]
-        + contribs["restrictedContributionsCount"]
-    )
+    # Count commits across ALL years (default query only covers last 365 days)
+    created_year = int(user["createdAt"][:4])
+    current_year = datetime.now().year
+    total_commits = 0
+
+    commits_query = """
+    query($login: String!, $from: DateTime!, $to: DateTime!) {
+        user(login: $login) {
+            contributionsCollection(from: $from, to: $to) {
+                totalCommitContributions
+                restrictedContributionsCount
+            }
+        }
+    }
+    """
+    for year in range(created_year, current_year + 1):
+        from_date = f"{year}-01-01T00:00:00Z"
+        to_date = f"{year}-12-31T23:59:59Z"
+        result = graphql(commits_query, {
+            "login": USERNAME,
+            "from": from_date,
+            "to": to_date,
+        })
+        contribs = result["data"]["user"]["contributionsCollection"]
+        total_commits += (
+            contribs["totalCommitContributions"]
+            + contribs["restrictedContributionsCount"]
+        )
+    print(f"  Summed commits across {current_year - created_year + 1} years")
 
     # Aggregate languages
     lang_sizes: dict[str, int] = {}
