@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="680" viewBox="0 0 850 680">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700');
+    text { font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
+  </style>
+
+  <!-- Terminal window -->
+  <rect width="850" height="680" rx="10" fill="#ffffff" stroke="#d0d7de" stroke-width="1"/>
+
+  <!-- Title bar -->
+  <rect width="850" height="36" rx="10" fill="#f6f8fa"/>
+  <rect x="0" y="26" width="850" height="10" fill="#f6f8fa"/>
+  <line x1="0" y1="36" x2="850" y2="36" stroke="#d0d7de" stroke-width="1"/>
+
+  <!-- Linux-style window buttons (right side) -->
+  <text x="786" y="24" font-size="16" fill="#656d76">─</text>
+  <text x="806" y="23" font-size="14" fill="#656d76">□</text>
+  <text x="826" y="24" font-size="16" fill="#f85149">✕</text>
+
+  <!-- Title -->
+  <text x="425" y="23" text-anchor="middle" font-size="12" fill="#656d76">david@netviper.gr — bash</text>
+
+  <!-- NetViper ASCII Art (Poison font, green) -->
+  <text font-size="14" fill="#1a7f37" xml:space="preserve">
+    <tspan x="30" y="56">@@@  @@@  @@@@@@@@  @@@@@@@  @@@  @@@  @@@  @@@@@@@   @@@@@@@@  @@@@@@@</tspan>
+    <tspan x="30" y="72">@@@@ @@@  @@@@@@@@  @@@@@@@  @@@  @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@@@@@</tspan>
+    <tspan x="30" y="88">@@!@!@@@  @@!         @@!    @@!  @@@  @@!  @@!  @@@  @@!       @@!  @@@</tspan>
+    <tspan x="30" y="104">!@!!@!@!  !@!         !@!    !@!  @!@  !@!  !@!  @!@  !@!       !@!  @!@</tspan>
+    <tspan x="30" y="120">@!@ !!@!  @!!!:!      @!!    @!@  !@!  !!@  @!@@!@!   @!!!:!    @!@!!@!</tspan>
+    <tspan x="30" y="136">!@!  !!!  !!!!!:      !!!    !@!  !!!  !!!  !!@!!!    !!!!!:    !!@!@!</tspan>
+    <tspan x="30" y="152">!!:  !!!  !!:         !!:    :!:  !!:  !!:  !!:       !!:       !!: :!!</tspan>
+    <tspan x="30" y="168">:!:  !:!  :!:         :!:     ::!!:!   :!:  :!:       :!:       :!:  !:!</tspan>
+    <tspan x="30" y="184"> ::   ::   :: ::::     ::      ::::     ::   ::        :: ::::  ::   :::</tspan>
+    <tspan x="30" y="200">::    :   : :: ::      :        :      :     :        : :: ::    :   : :</tspan>
+  </text>
+
+  <!-- Header -->
+  <text x="30" y="232" font-size="14" font-weight="bold" fill="#bf3100">david</text>
+  <text x="72" y="232" font-size="14" fill="#1f2328">@</text>
+  <text x="82" y="232" font-size="14" font-weight="bold" fill="#bf3100">netviper.gr</text>
+  <text x="30" y="250" font-size="14" fill="#d0d7de">──────────────────────────────────────────</text>
+
+  <!-- Info section -->
+  <text x="30" y="270" font-size="14" fill="#0550ae">Role</text>
+  <text x="145" y="270" font-size="14" fill="#1f2328">Founder, NetViper</text>
+  <text x="30" y="288" font-size="14" fill="#0550ae">Background</text>
+  <text x="145" y="288" font-size="14" fill="#1f2328">USMC Veteran</text>
+  <text x="30" y="306" font-size="14" fill="#0550ae">Location</text>
+  <text x="145" y="306" font-size="14" fill="#1f2328">Athens, Greece</text>
+  <text x="30" y="324" font-size="14" fill="#0550ae">Web</text>
+  <text x="145" y="324" font-size="14" fill="#1f2328">netviper.gr</text>
+  <text x="30" y="342" font-size="14" fill="#0550ae">Clients</text>
+  <text x="145" y="342" font-size="14" fill="#1f2328">Netflix · HBO · Warner Bros · Fox · Sony</text>
+
+  <!-- Stack section -->
+  <text x="30" y="376" font-size="14" font-weight="bold" fill="#bf3100">Stack</text>
+  <text x="30" y="394" font-size="14" fill="#d0d7de">──────────────────────────────────────────</text>
+  <text x="30" y="414" font-size="14" fill="#1f2328">Rust · Python · Django · PostgreSQL · AWS · Docker · Linux</text>
+
+  <!-- Projects section -->
+  <text x="30" y="448" font-size="14" font-weight="bold" fill="#bf3100">Projects</text>
+  <text x="30" y="466" font-size="14" fill="#d0d7de">──────────────────────────────────────────</text>
+  <text x="30" y="486" font-size="14" fill="#1a7f37">Keryx</text>
+  <text x="80" y="486" font-size="14" fill="#656d76">—</text>
+  <text x="100" y="486" font-size="14" fill="#1f2328">Encrypted file transfer SaaS</text>
+  <text x="30" y="504" font-size="14" fill="#1a7f37">Talos</text>
+  <text x="80" y="504" font-size="14" fill="#656d76">—</text>
+  <text x="100" y="504" font-size="14" fill="#1f2328">HW-bound licensing for Rust</text>
+  <text x="30" y="522" font-size="14" fill="#1a7f37">ML/AI</text>
+  <text x="80" y="522" font-size="14" fill="#656d76">—</text>
+  <text x="100" y="522" font-size="14" fill="#1f2328">Custom solutions</text>
+
+  <!-- GitHub section -->
+  <text x="30" y="556" font-size="14" font-weight="bold" fill="#bf3100">GitHub</text>
+  <text x="30" y="574" font-size="14" fill="#d0d7de">──────────────────────────────────────────</text>
+  <text x="30" y="594" font-size="14" fill="#0550ae">Repos</text>
+  <text x="85" y="594" font-size="14" fill="#1f2328" id="repos_data">—</text>
+  <text x="140" y="594" font-size="14" fill="#0550ae">Stars</text>
+  <text x="195" y="594" font-size="14" fill="#1f2328" id="stars_data">—</text>
+  <text x="260" y="594" font-size="14" fill="#0550ae">Commits</text>
+  <text x="335" y="594" font-size="14" fill="#1f2328" id="commits_data">—</text>
+
+  <!-- Language bars -->
+  <rect x="30" y="614" width="150" height="10" rx="3" fill="#eaeef2"/>
+  <rect x="30" y="614" width="93" height="10" rx="3" fill="#dea584" id="rust_bar"/>
+  <text x="190" y="624" font-size="12" fill="#1f2328">Rust</text>
+  <text x="260" y="624" font-size="12" fill="#656d76" id="rust_pct">—</text>
+
+  <rect x="30" y="634" width="150" height="10" rx="3" fill="#eaeef2"/>
+  <rect x="30" y="634" width="45" height="10" rx="3" fill="#3572a5" id="python_bar"/>
+  <text x="190" y="644" font-size="12" fill="#1f2328">Python</text>
+  <text x="260" y="644" font-size="12" fill="#656d76" id="python_pct">—</text>
+
+  <rect x="30" y="654" width="150" height="10" rx="3" fill="#eaeef2"/>
+  <rect x="30" y="654" width="12" height="10" rx="3" fill="#656d76" id="other_bar"/>
+  <text x="190" y="664" font-size="12" fill="#1f2328">Other</text>
+  <text x="260" y="664" font-size="12" fill="#656d76" id="other_pct">—</text>
+</svg>

@@ -1,16 +1,6 @@
-# Hey, I'm Dave
-
-Founder of **NetViper** — a software consultancy and product studio based in Athens, Greece. I build security-focused infrastructure and developer tools, primarily in Rust and Python.
-
-### What I'm building
-
-- **[Keryx](https://keryx.io)** — Encrypted file transfer SaaS. Benchmarked at 3.4x faster than SCP intercontinentally.
-- **[Talos](https://github.com/dmriding/talos)** — Hardware-bound software licensing for Rust. Hit #2 on r/rust.
-
-### Stack
-
-`Rust` `Python` `Django` `PostgreSQL` `AWS` `Docker` `Linux`
-
----
-
-**Get in touch:** [netviper.gr](https://netviper.gr) · Athens, Greece
+<a href="https://github.com/dmriding">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="dark_mode.svg">
+    <img alt="David Riding's GitHub Profile" src="light_mode.svg">
+  </picture>
+</a>
