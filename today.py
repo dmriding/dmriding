@@ -5,9 +5,9 @@ Designed to run via GitHub Actions with GITHUB_TOKEN env var.
 
 import os
 import json
+import re
 import urllib.request
 import urllib.error
-from xml.etree import ElementTree as ET
 
 USERNAME = "dmriding"
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
@@ -96,26 +96,30 @@ def fetch_stats() -> dict:
 
 
 def update_svg(filepath: str, stats: dict) -> None:
-    """Update an SVG file with fresh stats."""
-    ET.register_namespace("", "http://www.w3.org/2000/svg")
-    tree = ET.parse(filepath)
-    root = tree.getroot()
-    ns = {"svg": "http://www.w3.org/2000/svg"}
+    """Update an SVG file with fresh stats using regex (preserves formatting)."""
+    with open(filepath, "r", encoding="utf-8") as f:
+        svg = f.read()
 
-    def set_text(element_id: str, value: str) -> None:
-        el = root.find(f".//svg:text[@id='{element_id}']", ns)
-        if el is not None:
-            el.text = value
+    def set_text(svg: str, element_id: str, value: str) -> str:
+        """Replace text content of a <text id="...">...</text> element."""
+        pattern = rf'(id="{element_id}"[^>]*>)[^<]*(</text>)'
+        return re.sub(pattern, rf"\g<1>{value}\2", svg)
 
-    def set_rect_width(element_id: str, width: float) -> None:
-        el = root.find(f".//svg:rect[@id='{element_id}']", ns)
-        if el is not None:
-            el.set("width", str(max(3, int(width))))
+    def set_rect_width(svg: str, element_id: str, width: float) -> str:
+        """Replace width attribute of a <rect id="..."> element."""
+        w = str(max(3, int(width)))
+        pattern = rf'(id="{element_id}"[^>]*\bwidth=")[^"]*(")'
+        result = re.sub(pattern, rf"\g<1>{w}\2", svg)
+        if result == svg:
+            # id might appear before width in the attributes
+            pattern = rf'(<rect[^>]*\bwidth=")([^"]*)"([^>]*id="{element_id}")'
+            result = re.sub(pattern, rf'\g<1>{w}"\3', svg)
+        return result
 
     # Update stats text
-    set_text("repos_data", str(stats["repos"]))
-    set_text("stars_data", str(stats["stars"]))
-    set_text("commits_data", str(stats["commits"]))
+    svg = set_text(svg, "repos_data", str(stats["repos"]))
+    svg = set_text(svg, "stars_data", str(stats["stars"]))
+    svg = set_text(svg, "commits_data", str(stats["commits"]))
 
     # Update language bars and percentages
     lang_ids = [
@@ -126,13 +130,14 @@ def update_svg(filepath: str, stats: dict) -> None:
     for i, (bar_id, pct_id) in enumerate(lang_ids):
         if i < len(stats["languages"]):
             lang = stats["languages"][i]
-            set_text(pct_id, f"{lang['pct']}%")
-            set_rect_width(bar_id, lang["pct"] / 100 * BAR_MAX_WIDTH)
+            svg = set_text(svg, pct_id, f"{lang['pct']}%")
+            svg = set_rect_width(svg, bar_id, lang["pct"] / 100 * BAR_MAX_WIDTH)
         else:
-            set_text(pct_id, "0%")
-            set_rect_width(bar_id, 3)
+            svg = set_text(svg, pct_id, "0%")
+            svg = set_rect_width(svg, bar_id, 3)
 
-    tree.write(filepath, encoding="unicode", xml_declaration=False)
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(svg)
 
 
 def main():
