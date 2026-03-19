@@ -49,50 +49,48 @@
   <text x="145" y="306" font-size="14" fill="#e6edf3">Athens, Greece</text>
   <text x="30" y="324" font-size="14" fill="#58a6ff">Web</text>
   <text x="145" y="324" font-size="14" fill="#e6edf3">netviper.gr</text>
-  <text x="30" y="342" font-size="14" fill="#58a6ff">Clients</text>
-  <text x="145" y="342" font-size="14" fill="#e6edf3">Netflix · HBO · Warner Bros · Fox · Sony</text>
 
-  
-  <text x="30" y="376" font-size="14" font-weight="bold" fill="#f0883e">Stack</text>
-  <text x="30" y="394" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
-  <text x="30" y="414" font-size="14" fill="#e6edf3">Rust · Python · Django · PostgreSQL · AWS · Docker · Linux</text>
 
-  
+  <text x="30" y="358" font-size="14" font-weight="bold" fill="#f0883e">Stack</text>
+  <text x="30" y="376" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
+  <text x="30" y="396" font-size="14" fill="#58a6ff">Languages</text>
+  <text x="145" y="396" font-size="14" fill="#e6edf3">Rust · Python · C/C++ · CUDA</text>
+  <text x="30" y="414" font-size="14" fill="#58a6ff">Infra</text>
+  <text x="145" y="414" font-size="14" fill="#e6edf3">Django · PostgreSQL · AWS · Docker · Linux · WebRTC</text>
+
+
   <text x="30" y="448" font-size="14" font-weight="bold" fill="#f0883e">Projects</text>
   <text x="30" y="466" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
-  <text x="30" y="486" font-size="14" fill="#3fb950">Keryx</text>
+  <text x="30" y="486" font-size="14" fill="#3fb950">Talos</text>
   <text x="80" y="486" font-size="14" fill="#7d8590">—</text>
-  <text x="100" y="486" font-size="14" fill="#e6edf3">Encrypted file transfer SaaS</text>
-  <text x="30" y="504" font-size="14" fill="#3fb950">Talos</text>
+  <text x="100" y="486" font-size="14" fill="#e6edf3">HW-bound licensing for Rust</text>
+  <text x="30" y="504" font-size="14" fill="#3fb950">ML/AI</text>
   <text x="80" y="504" font-size="14" fill="#7d8590">—</text>
-  <text x="100" y="504" font-size="14" fill="#e6edf3">HW-bound licensing for Rust</text>
-  <text x="30" y="522" font-size="14" fill="#3fb950">ML/AI</text>
-  <text x="80" y="522" font-size="14" fill="#7d8590">—</text>
-  <text x="100" y="522" font-size="14" fill="#e6edf3">Custom solutions</text>
+  <text x="100" y="504" font-size="14" fill="#e6edf3">Custom solutions</text>
 
-  
-  <text x="30" y="556" font-size="14" font-weight="bold" fill="#f0883e">GitHub</text>
-  <text x="30" y="574" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
-  <text x="30" y="594" font-size="14" fill="#58a6ff">Repos</text>
-  <text x="85" y="594" font-size="14" fill="#e6edf3" id="repos_data">8</text>
-  <text x="140" y="594" font-size="14" fill="#58a6ff">Stars</text>
-  <text x="195" y="594" font-size="14" fill="#e6edf3" id="stars_data">22</text>
-  <text x="260" y="594" font-size="14" fill="#58a6ff">Commits</text>
-  <text x="335" y="594" font-size="14" fill="#e6edf3" id="commits_data">1285</text>
 
-  
-  <rect x="30" y="614" width="150" height="10" rx="3" fill="#21262d" />
-  <rect x="30" y="614" width="66" height="10" rx="3" fill="#dea584" id="rust_bar" />
-  <text x="190" y="624" font-size="12" fill="#e6edf3">Rust</text>
-  <text x="260" y="624" font-size="12" fill="#7d8590" id="rust_pct">44%</text>
+  <text x="30" y="538" font-size="14" font-weight="bold" fill="#f0883e">GitHub</text>
+  <text x="30" y="556" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
+  <text x="30" y="576" font-size="14" fill="#58a6ff">Repos</text>
+  <text x="85" y="576" font-size="14" fill="#e6edf3" id="repos_data">8</text>
+  <text x="140" y="576" font-size="14" fill="#58a6ff">Stars</text>
+  <text x="195" y="576" font-size="14" fill="#e6edf3" id="stars_data">22</text>
+  <text x="260" y="576" font-size="14" fill="#58a6ff">Commits</text>
+  <text x="335" y="576" font-size="14" fill="#e6edf3" id="commits_data">1285</text>
 
-  <rect x="30" y="634" width="150" height="10" rx="3" fill="#21262d" />
-  <rect x="30" y="634" width="48" height="10" rx="3" fill="#3572a5" id="python_bar" />
-  <text x="190" y="644" font-size="12" fill="#e6edf3">Python</text>
-  <text x="260" y="644" font-size="12" fill="#7d8590" id="python_pct">32%</text>
 
-  <rect x="30" y="654" width="150" height="10" rx="3" fill="#21262d" />
-  <rect x="30" y="654" width="36" height="10" rx="3" fill="#7d8590" id="other_bar" />
-  <text x="190" y="664" font-size="12" fill="#e6edf3">Other</text>
-  <text x="260" y="664" font-size="12" fill="#7d8590" id="other_pct">24%</text>
+  <rect x="30" y="596" width="150" height="10" rx="3" fill="#21262d" />
+  <rect x="30" y="596" width="66" height="10" rx="3" fill="#dea584" id="rust_bar" />
+  <text x="190" y="606" font-size="12" fill="#e6edf3">Rust</text>
+  <text x="260" y="606" font-size="12" fill="#7d8590" id="rust_pct">44%</text>
+
+  <rect x="30" y="616" width="150" height="10" rx="3" fill="#21262d" />
+  <rect x="30" y="616" width="48" height="10" rx="3" fill="#3572a5" id="python_bar" />
+  <text x="190" y="626" font-size="12" fill="#e6edf3">Python</text>
+  <text x="260" y="626" font-size="12" fill="#7d8590" id="python_pct">32%</text>
+
+  <rect x="30" y="636" width="150" height="10" rx="3" fill="#21262d" />
+  <rect x="30" y="636" width="36" height="10" rx="3" fill="#7d8590" id="other_bar" />
+  <text x="190" y="646" font-size="12" fill="#e6edf3">Other</text>
+  <text x="260" y="646" font-size="12" fill="#7d8590" id="other_pct">24%</text>
 </svg>

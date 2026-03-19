@@ -15,6 +15,13 @@ API_URL = "https://api.github.com/graphql"
 SVG_FILES = ["dark_mode.svg", "light_mode.svg"]
 BAR_MAX_WIDTH = 150
 
+# Hardcode overrides (set to None to use live API values)
+OVERRIDES = {
+    "repos": 73,
+    "stars": None,
+    "commits": None,
+}
+
 
 def graphql(query: str, variables: dict | None = None) -> dict:
     """Execute a GitHub GraphQL query."""
@@ -152,6 +159,10 @@ def main():
     else:
         print(f"Fetching stats for {USERNAME}...")
         stats = fetch_stats()
+        # Apply hardcoded overrides
+        for key, val in OVERRIDES.items():
+            if val is not None:
+                stats[key] = val
         print(f"  Repos: {stats['repos']}")
         print(f"  Stars: {stats['stars']}")
         print(f"  Commits: {stats['commits']}")
