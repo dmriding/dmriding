@@ -76,13 +76,13 @@
   <text x="140" y="576" font-size="14" fill="#58a6ff">Stars</text>
   <text x="195" y="576" font-size="14" fill="#e6edf3" id="stars_data">22</text>
   <text x="260" y="576" font-size="14" fill="#58a6ff">Commits</text>
-  <text x="335" y="576" font-size="14" fill="#e6edf3" id="commits_data">2501</text>
+  <text x="335" y="576" font-size="14" fill="#e6edf3" id="commits_data">2537</text>
 
 
   <rect x="30" y="596" width="150" height="10" rx="3" fill="#21262d" />
-  <rect x="30" y="596" width="147" height="10" rx="3" fill="#dea584" id="rust_bar" />
+  <rect x="30" y="596" width="148" height="10" rx="3" fill="#dea584" id="rust_bar" />
   <text x="190" y="606" font-size="12" fill="#e6edf3">Rust</text>
-  <text x="260" y="606" font-size="12" fill="#7d8590" id="rust_pct">98%</text>
+  <text x="260" y="606" font-size="12" fill="#7d8590" id="rust_pct">99%</text>
 
   <rect x="30" y="616" width="150" height="10" rx="3" fill="#21262d" />
   <rect x="30" y="616" width="3" height="10" rx="3" fill="#3572a5" id="python_bar" />
@@ -92,5 +92,5 @@
   <rect x="30" y="636" width="150" height="10" rx="3" fill="#21262d" />
   <rect x="30" y="636" width="3" height="10" rx="3" fill="#7d8590" id="other_bar" />
   <text x="190" y="646" font-size="12" fill="#e6edf3">Other</text>
-  <text x="260" y="646" font-size="12" fill="#7d8590" id="other_pct">1%</text>
+  <text x="260" y="646" font-size="12" fill="#7d8590" id="other_pct">0%</text>
 </svg>
