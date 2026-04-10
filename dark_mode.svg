@@ -76,7 +76,7 @@
   <text x="140" y="576" font-size="14" fill="#58a6ff">Stars</text>
   <text x="195" y="576" font-size="14" fill="#e6edf3" id="stars_data">51</text>
   <text x="260" y="576" font-size="14" fill="#58a6ff">Commits</text>
-  <text x="335" y="576" font-size="14" fill="#e6edf3" id="commits_data">2706</text>
+  <text x="335" y="576" font-size="14" fill="#e6edf3" id="commits_data">2707</text>
 
 
   <rect x="30" y="596" width="150" height="10" rx="3" fill="#21262d" />
