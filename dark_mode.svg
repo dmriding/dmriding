@@ -74,9 +74,9 @@
   <text x="30" y="576" font-size="14" fill="#58a6ff">Repos</text>
   <text x="85" y="576" font-size="14" fill="#e6edf3" id="repos_data">74</text>
   <text x="140" y="576" font-size="14" fill="#58a6ff">Stars</text>
-  <text x="195" y="576" font-size="14" fill="#e6edf3" id="stars_data">72</text>
+  <text x="195" y="576" font-size="14" fill="#e6edf3" id="stars_data">71</text>
   <text x="260" y="576" font-size="14" fill="#58a6ff">Commits</text>
-  <text x="335" y="576" font-size="14" fill="#e6edf3" id="commits_data">2863</text>
+  <text x="335" y="576" font-size="14" fill="#e6edf3" id="commits_data">2870</text>
 
 
   <rect x="30" y="596" width="150" height="10" rx="3" fill="#21262d" />
