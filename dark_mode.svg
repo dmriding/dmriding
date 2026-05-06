@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="850" height="680" viewBox="0 0 850 680">
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="714" viewBox="0 0 850 714">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700');
     text { font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
   </style>
 
-  
-  <rect width="850" height="680" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1" />
+
+  <rect width="850" height="714" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1" />
 
   
   <rect width="850" height="36" rx="10" fill="#161b22" />
@@ -34,63 +34,67 @@
     <tspan x="30" y="200">::    :   : :: ::      :        :      :     :        : :: ::    :   : :</tspan>
   </text>
 
-  
-  <text x="30" y="232" font-size="14" font-weight="bold" fill="#f0883e">david</text>
-  <text x="72" y="232" font-size="14" fill="#e6edf3">@</text>
-  <text x="82" y="232" font-size="14" font-weight="bold" fill="#f0883e">netviper.gr</text>
-  <text x="30" y="250" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
+  <text x="30" y="224" font-size="13" fill="#7d8590">Building the infrastructure AI systems are missing</text>
 
-  
-  <text x="30" y="270" font-size="14" fill="#58a6ff">Role</text>
-  <text x="145" y="270" font-size="14" fill="#e6edf3">Founder, NetViper</text>
-  <text x="30" y="288" font-size="14" fill="#58a6ff">Background</text>
-  <text x="145" y="288" font-size="14" fill="#e6edf3">USMC Veteran</text>
-  <text x="30" y="306" font-size="14" fill="#58a6ff">Location</text>
-  <text x="145" y="306" font-size="14" fill="#e6edf3">Athens, Greece</text>
-  <text x="30" y="324" font-size="14" fill="#58a6ff">Web</text>
-  <text x="145" y="324" font-size="14" fill="#e6edf3">netviper.gr</text>
+  <text x="30" y="248" font-size="14" font-weight="bold" fill="#f0883e">david</text>
+  <text x="72" y="248" font-size="14" fill="#e6edf3">@</text>
+  <text x="82" y="248" font-size="14" font-weight="bold" fill="#f0883e">netviper.gr</text>
+  <text x="30" y="266" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
 
 
-  <text x="30" y="358" font-size="14" font-weight="bold" fill="#f0883e">Stack</text>
-  <text x="30" y="376" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
-  <text x="30" y="396" font-size="14" fill="#58a6ff">Languages</text>
-  <text x="145" y="396" font-size="14" fill="#e6edf3">Rust · Python · C/C++ · CUDA</text>
-  <text x="30" y="414" font-size="14" fill="#58a6ff">Infra</text>
-  <text x="145" y="414" font-size="14" fill="#e6edf3">Django · PostgreSQL · AWS · Docker · Linux · WebRTC</text>
+  <text x="30" y="286" font-size="14" fill="#58a6ff">Role</text>
+  <text x="145" y="286" font-size="14" fill="#e6edf3">Founder, NetViper</text>
+  <text x="30" y="304" font-size="14" fill="#58a6ff">Background</text>
+  <text x="145" y="304" font-size="14" fill="#e6edf3">USMC Veteran</text>
+  <text x="30" y="322" font-size="14" fill="#58a6ff">Location</text>
+  <text x="145" y="322" font-size="14" fill="#e6edf3">Athens, Greece</text>
+  <text x="30" y="340" font-size="14" fill="#58a6ff">Web</text>
+  <text x="145" y="340" font-size="14" fill="#e6edf3">netviper.gr</text>
 
 
-  <text x="30" y="448" font-size="14" font-weight="bold" fill="#f0883e">Projects</text>
-  <text x="30" y="466" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
-  <text x="30" y="486" font-size="14" fill="#3fb950">Talos</text>
-  <text x="80" y="486" font-size="14" fill="#7d8590">—</text>
-  <text x="100" y="486" font-size="14" fill="#e6edf3">HW-bound licensing for Rust</text>
-  <text x="30" y="504" font-size="14" fill="#3fb950">ML/AI</text>
-  <text x="80" y="504" font-size="14" fill="#7d8590">—</text>
-  <text x="100" y="504" font-size="14" fill="#e6edf3">Custom solutions</text>
+  <text x="30" y="374" font-size="14" font-weight="bold" fill="#f0883e">Stack</text>
+  <text x="30" y="392" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
+  <text x="30" y="412" font-size="14" fill="#58a6ff">Languages</text>
+  <text x="145" y="412" font-size="14" fill="#e6edf3">Rust · Python · CUDA · PTX</text>
+  <text x="30" y="430" font-size="14" fill="#58a6ff">Focus</text>
+  <text x="145" y="430" font-size="14" fill="#e6edf3">GPU-accelerated AI infra · ML systems · ultra-low-latency Rust</text>
 
 
-  <text x="30" y="538" font-size="14" font-weight="bold" fill="#f0883e">GitHub</text>
-  <text x="30" y="556" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
-  <text x="30" y="576" font-size="14" fill="#58a6ff">Repos</text>
-  <text x="85" y="576" font-size="14" fill="#e6edf3" id="repos_data">74</text>
-  <text x="140" y="576" font-size="14" fill="#58a6ff">Stars</text>
-  <text x="195" y="576" font-size="14" fill="#e6edf3" id="stars_data">75</text>
-  <text x="260" y="576" font-size="14" fill="#58a6ff">Commits</text>
-  <text x="335" y="576" font-size="14" fill="#e6edf3" id="commits_data">2884</text>
+  <text x="30" y="464" font-size="14" font-weight="bold" fill="#f0883e">Projects</text>
+  <text x="30" y="482" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
+  <text x="30" y="502" font-size="14" fill="#3fb950">Kaio</text>
+  <text x="80" y="502" font-size="14" fill="#7d8590">—</text>
+  <text x="100" y="502" font-size="14" fill="#e6edf3">Rust-native GPU kernels, compiled to PTX (OSS)</text>
+  <text x="30" y="520" font-size="14" fill="#3fb950">Talos</text>
+  <text x="80" y="520" font-size="14" fill="#7d8590">—</text>
+  <text x="100" y="520" font-size="14" fill="#e6edf3">HW-bound licensing for Rust</text>
+  <text x="30" y="538" font-size="14" fill="#3fb950">ML/AI</text>
+  <text x="80" y="538" font-size="14" fill="#7d8590">—</text>
+  <text x="100" y="538" font-size="14" fill="#e6edf3">Custom solutions</text>
 
 
-  <rect x="30" y="596" width="150" height="10" rx="3" fill="#21262d" />
-  <rect x="30" y="596" width="141" height="10" rx="3" fill="#dea584" id="rust_bar" />
-  <text x="190" y="606" font-size="12" fill="#e6edf3">Rust</text>
-  <text x="260" y="606" font-size="12" fill="#7d8590" id="rust_pct">94%</text>
+  <text x="30" y="572" font-size="14" font-weight="bold" fill="#f0883e">GitHub</text>
+  <text x="30" y="590" font-size="14" fill="#30363d">──────────────────────────────────────────</text>
+  <text x="30" y="610" font-size="14" fill="#58a6ff">Repos</text>
+  <text x="85" y="610" font-size="14" fill="#e6edf3" id="repos_data">74</text>
+  <text x="140" y="610" font-size="14" fill="#58a6ff">Stars</text>
+  <text x="195" y="610" font-size="14" fill="#e6edf3" id="stars_data">75</text>
+  <text x="260" y="610" font-size="14" fill="#58a6ff">Commits</text>
+  <text x="335" y="610" font-size="14" fill="#e6edf3" id="commits_data">2884</text>
 
-  <rect x="30" y="616" width="150" height="10" rx="3" fill="#21262d" />
-  <rect x="30" y="616" width="3" height="10" rx="3" fill="#3572a5" id="python_bar" />
-  <text x="190" y="626" font-size="12" fill="#e6edf3">Python</text>
-  <text x="260" y="626" font-size="12" fill="#7d8590" id="python_pct">2%</text>
 
-  <rect x="30" y="636" width="150" height="10" rx="3" fill="#21262d" />
-  <rect x="30" y="636" width="6" height="10" rx="3" fill="#7d8590" id="other_bar" />
-  <text x="190" y="646" font-size="12" fill="#e6edf3">Other</text>
-  <text x="260" y="646" font-size="12" fill="#7d8590" id="other_pct">4%</text>
+  <rect x="30" y="630" width="150" height="10" rx="3" fill="#21262d" />
+  <rect x="30" y="630" width="141" height="10" rx="3" fill="#dea584" id="rust_bar" />
+  <text x="190" y="640" font-size="12" fill="#e6edf3">Rust</text>
+  <text x="260" y="640" font-size="12" fill="#7d8590" id="rust_pct">94%</text>
+
+  <rect x="30" y="650" width="150" height="10" rx="3" fill="#21262d" />
+  <rect x="30" y="650" width="3" height="10" rx="3" fill="#3572a5" id="python_bar" />
+  <text x="190" y="660" font-size="12" fill="#e6edf3">Python</text>
+  <text x="260" y="660" font-size="12" fill="#7d8590" id="python_pct">2%</text>
+
+  <rect x="30" y="670" width="150" height="10" rx="3" fill="#21262d" />
+  <rect x="30" y="670" width="6" height="10" rx="3" fill="#7d8590" id="other_bar" />
+  <text x="190" y="680" font-size="12" fill="#e6edf3">Other</text>
+  <text x="260" y="680" font-size="12" fill="#7d8590" id="other_pct">4%</text>
 </svg>
