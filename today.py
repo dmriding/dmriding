@@ -17,7 +17,7 @@ BAR_MAX_WIDTH = 150
 
 # Hardcode overrides (set to None to use live API values)
 OVERRIDES = {
-    "repos": 92,
+    "repos": 94,
     "stars": None,
     "commits": None,
 }
