@@ -27,7 +27,7 @@ jobs:
           # No fallback to secrets.GITHUB_TOKEN: it sees public repos only.
           GITHUB_TOKEN: ${{ secrets.STATS_TOKEN }}
 
-      # main requires signed commits via PR, so the cards live on a bot-only branch.
+      # main takes signed commits via PR only, so the cards live on their own branch.
       - name: Publish cards to the stats branch
         run: |
           git checkout -q --orphan stats

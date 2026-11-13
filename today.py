@@ -1,8 +1,10 @@
 """Renders dark_mode.svg and light_mode.svg from template.svg with live GitHub stats.
 
-GITHUB_TOKEN must be USERNAME's classic PAT with `repo`. Anything narrower
-returns smaller totals without an error, so it is refused. Contributions in
-repos even that token cannot read are in the calendar total only.
+GITHUB_TOKEN must be USERNAME's own token with the full `repo` scope: a
+narrower one returns smaller totals without an error, so it is refused.
+The gate cannot see org limits (SSO, OAuth app policy) or repos the account
+lost access to. Those show only as `hidden` in the log and count toward
+Contributions alone.
 """
 
 import json
@@ -88,10 +90,14 @@ def graphql(query: str, variables: dict) -> dict:
         scopes = resp.headers.get("X-OAuth-Scopes", "")
         body = json.loads(resp.read())
     if not has_repo_scope(scopes):
-        sys.exit("GITHUB_TOKEN is not a classic token with the `repo` scope")
+        sys.exit("GITHUB_TOKEN lacks the full `repo` scope")
     if body.get("errors"):
-        # Types only: messages can name private orgs and Actions logs here are public.
-        sys.exit("GraphQL error: " + ", ".join(sorted({str(e.get("type")) for e in body["errors"]})))
+        # Never the message: it can name private orgs and Actions logs here are public.
+        labels = {
+            str(e.get("type") or (e.get("extensions") or {}).get("code") or "untyped")
+            for e in body["errors"]
+        }
+        sys.exit("GraphQL error: " + ", ".join(sorted(labels)))
     return body["data"]
 
 
@@ -172,7 +178,7 @@ def lang_rows(languages: list, palette: dict) -> str:
     for i, (name, pct, color) in enumerate(languages):
         x, y = i // per_column * LANG_COLUMN, i % per_column * 20
         width = max(3, round(pct / 100 * BAR_WIDTH))
-        label = name if len(name) <= NAME_MAX else name[: NAME_MAX - 1] + "…"
+        label = name if len(name) <= NAME_MAX else name[: NAME_MAX - 1].rstrip() + "…"
         rows.append(
             f'<rect x="{x}" y="{y}" width="{BAR_WIDTH}" height="10" rx="3" fill="{palette["track"]}" />'
             f'<rect x="{x}" y="{y}" width="{width}" height="10" rx="3" fill="{color or palette["muted"]}" />'
