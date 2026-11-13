@@ -7,25 +7,33 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency: stats
+
 jobs:
   update:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      # STATS_TOKEN can write to every repo: no tag-pinned or third-party action in this job.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+      - name: Test
+        run: python3 -m unittest -q
 
-      - name: Fetch stats and update SVGs
-        run: python today.py
+      - name: Render cards
+        run: python3 today.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # No fallback to secrets.GITHUB_TOKEN: it sees public repos only.
+          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN }}
 
-      - name: Commit updated SVGs
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: 'chore: update stats'
-          file_pattern: '*.svg'
+      # main requires signed commits via PR, so the cards live on a bot-only branch.
+      - name: Publish cards to the stats branch
+        run: |
+          git checkout -q --orphan stats
+          git rm -rq --cached .
+          git add -f dark_mode.svg light_mode.svg
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -qm 'chore: update stats'
+          git push -f origin stats

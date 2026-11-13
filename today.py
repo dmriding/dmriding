@@ -1,203 +1,206 @@
-"""
-Fetches GitHub stats for dmriding and updates the SVG templates.
-Designed to run via GitHub Actions with GITHUB_TOKEN env var.
+"""Renders dark_mode.svg and light_mode.svg from template.svg with live GitHub stats.
+
+GITHUB_TOKEN must be USERNAME's classic PAT with `repo`. Anything narrower
+returns smaller totals without an error, so it is refused. Contributions in
+repos even that token cannot read are in the calendar total only.
 """
 
-import os
 import json
-import re
+import os
+import sys
 import urllib.request
-import urllib.error
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from string import Template
+from xml.sax.saxutils import escape
 
 USERNAME = "dmriding"
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
+TOKEN = os.environ.get("GITHUB_TOKEN", "")
 API_URL = "https://api.github.com/graphql"
-SVG_FILES = ["dark_mode.svg", "light_mode.svg"]
-BAR_MAX_WIDTH = 150
+ROOT = Path(__file__).parent
+BAR_WIDTH = 150
+TOP_LANGS = 10
+LANG_COLUMN = 400  # x offset of the second language column
+NAME_MAX = 17  # characters that fit between a bar and its percent
+REPO_CAP = 100  # API maximum for commitContributionsByRepository
 
-# Hardcode overrides (set to None to use live API values)
-OVERRIDES = {
-    "repos": 100,
-    "stars": None,
-    "commits": None,
+PALETTES = {
+    "dark_mode.svg": {
+        "bg": "#0d1117", "titlebar": "#161b22", "border": "#30363d",
+        "fg": "#e6edf3", "muted": "#7d8590", "key": "#58a6ff",
+        "accent": "#f0883e", "green": "#3fb950", "track": "#21262d",
+        "close": "#f85149",
+    },
+    "light_mode.svg": {
+        "bg": "#ffffff", "titlebar": "#f6f8fa", "border": "#d0d7de",
+        "fg": "#1f2328", "muted": "#656d76", "key": "#0550ae",
+        "accent": "#bf3100", "green": "#1a7f37", "track": "#eaeef2",
+        "close": "#f85149",
+    },
 }
 
+PROFILE_QUERY = """
+query($login: String!) {
+  viewer { login }
+  user(login: $login) {
+    createdAt
+    pullRequests(states: MERGED) { totalCount }
+    public: repositories(first: 100, ownerAffiliations: OWNER, privacy: PUBLIC) {
+      nodes { stargazerCount }
+    }
+  }
+}
+"""
 
-def graphql(query: str, variables: dict | None = None) -> dict:
-    """Execute a GitHub GraphQL query."""
-    payload = json.dumps({"query": query, "variables": variables or {}}).encode()
+COMMITS_QUERY = """
+query($login: String!, $from: DateTime!, $to: DateTime!) {
+  user(login: $login) {
+    contributionsCollection(from: $from, to: $to) {
+      totalCommitContributions
+      restrictedContributionsCount
+      contributionCalendar { totalContributions }
+      commitContributionsByRepository(maxRepositories: 100) {
+        contributions { totalCount }
+        repository {
+          languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+            edges { size node { name color } }
+          }
+        }
+      }
+    }
+  }
+}
+"""
+
+
+def has_repo_scope(header: str) -> bool:
+    """Exact match: `public_repo` must not pass. Guard: test_today.TokenGate."""
+    return "repo" in [scope.strip() for scope in header.split(",")]
+
+
+def graphql(query: str, variables: dict) -> dict:
     req = urllib.request.Request(
         API_URL,
-        data=payload,
-        headers={
-            "Authorization": f"bearer {GITHUB_TOKEN}",
-            "Content-Type": "application/json",
-        },
+        data=json.dumps({"query": query, "variables": variables}).encode(),
+        headers={"Authorization": f"bearer {TOKEN}", "Content-Type": "application/json"},
     )
-    with urllib.request.urlopen(req) as resp:
-        return json.loads(resp.read())
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        scopes = resp.headers.get("X-OAuth-Scopes", "")
+        body = json.loads(resp.read())
+    if not has_repo_scope(scopes):
+        sys.exit("GITHUB_TOKEN is not a classic token with the `repo` scope")
+    if body.get("errors"):
+        # Types only: messages can name private orgs and Actions logs here are public.
+        sys.exit("GraphQL error: " + ", ".join(sorted({str(e.get("type")) for e in body["errors"]})))
+    return body["data"]
+
+
+def commit_windows(start: datetime, end: datetime):
+    """Yields contributions for [start, end); halves a window that hits
+    REPO_CAP, because the API drops the repos past the cap without saying so."""
+    coll = graphql(COMMITS_QUERY, {
+        "login": USERNAME,
+        "from": start.isoformat(),
+        "to": (end - timedelta(seconds=1)).isoformat(),
+    })["user"]["contributionsCollection"]
+    days = (end - start).days
+    if len(coll["commitContributionsByRepository"]) >= REPO_CAP and days > 1:
+        mid = start + timedelta(days=days // 2)
+        yield from commit_windows(start, mid)
+        yield from commit_windows(mid, end)
+    else:
+        yield coll
+
+
+def percent_rows(weights: dict) -> list:
+    """(name, pct) for the top languages plus a real Other, summing to 100 by
+    largest remainder. Guard: test_today.PercentRows."""
+    total = sum(weights.values())
+    if not total:
+        return []
+    ranked = sorted(weights.items(), key=lambda kv: kv[1], reverse=True)
+    rows = ranked[:TOP_LANGS]
+    rest = sum(w for _, w in ranked[TOP_LANGS:])
+    if rest:
+        rows.append(("Other", rest))
+    exact = [w / total * 100 for _, w in rows]
+    pcts = [int(x) for x in exact]
+    by_remainder = sorted(range(len(rows)), key=lambda i: exact[i] - pcts[i], reverse=True)
+    for i in by_remainder[: 100 - sum(pcts)]:
+        pcts[i] += 1
+    return [(name, pct) for (name, _), pct in zip(rows, pcts)]
 
 
 def fetch_stats() -> dict:
-    """Fetch repos, stars, commits, and language breakdown."""
-    from datetime import datetime
-
-    # Get repos, stars, languages, and account creation date
-    query = """
-    query($login: String!) {
-        user(login: $login) {
-            createdAt
-            repositories(first: 100, ownerAffiliations: OWNER, privacy: PUBLIC) {
-                totalCount
-                nodes {
-                    stargazerCount
-                    languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
-                        edges {
-                            size
-                            node { name }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    """
-    data = graphql(query, {"login": USERNAME})
-    user = data["data"]["user"]
-    repos = user["repositories"]
-
-    # Count stars
-    total_stars = sum(r["stargazerCount"] for r in repos["nodes"])
-
-    # Count commits across ALL years (default query only covers last 365 days)
-    created_year = int(user["createdAt"][:4])
-    current_year = datetime.now().year
-    total_commits = 0
-
-    commits_query = """
-    query($login: String!, $from: DateTime!, $to: DateTime!) {
-        user(login: $login) {
-            contributionsCollection(from: $from, to: $to) {
-                totalCommitContributions
-                restrictedContributionsCount
-            }
-        }
-    }
-    """
-    for year in range(created_year, current_year + 1):
-        from_date = f"{year}-01-01T00:00:00Z"
-        to_date = f"{year}-12-31T23:59:59Z"
-        result = graphql(commits_query, {
-            "login": USERNAME,
-            "from": from_date,
-            "to": to_date,
-        })
-        contribs = result["data"]["user"]["contributionsCollection"]
-        total_commits += (
-            contribs["totalCommitContributions"]
-            + contribs["restrictedContributionsCount"]
-        )
-    print(f"  Summed commits across {current_year - created_year + 1} years")
-
-    # Aggregate languages
-    lang_sizes: dict[str, int] = {}
-    for repo in repos["nodes"]:
-        for edge in repo["languages"]["edges"]:
-            name = edge["node"]["name"]
-            lang_sizes[name] = lang_sizes.get(name, 0) + edge["size"]
-
-    total_size = sum(lang_sizes.values()) or 1
-    top_langs = sorted(lang_sizes.items(), key=lambda x: x[1], reverse=True)
-
-    # Build top 3: first two explicitly, rest as "Other"
-    languages = []
-    for i, (name, size) in enumerate(top_langs[:2]):
-        languages.append({"name": name, "pct": round(size / total_size * 100)})
-    other_pct = 100 - sum(l["pct"] for l in languages)
-    if other_pct > 0:
-        languages.append({"name": "Other", "pct": other_pct})
+    data = graphql(PROFILE_QUERY, {"login": USERNAME})
+    if data["viewer"]["login"].lower() != USERNAME.lower():
+        sys.exit(f"GITHUB_TOKEN does not belong to {USERNAME}")
+    user = data["user"]
+    contributions, commits_year, hidden, weights, colors = 0, 0, 0, {}, {}
+    this_year = datetime.now(timezone.utc).year
+    for year in range(int(user["createdAt"][:4]), this_year + 1):
+        start = datetime(year, 1, 1, tzinfo=timezone.utc)
+        for coll in commit_windows(start, start.replace(year=year + 1)):
+            contributions += coll["contributionCalendar"]["totalContributions"]
+            hidden += coll["restrictedContributionsCount"]
+            if year == this_year:
+                commits_year += coll["totalCommitContributions"]
+            for entry in coll["commitContributionsByRepository"]:
+                # A repo's commits are split across its languages by byte share.
+                edges = entry["repository"]["languages"]["edges"]
+                size = sum(e["size"] for e in edges)
+                if not size:
+                    continue
+                for e in edges:
+                    name = e["node"]["name"]
+                    share = entry["contributions"]["totalCount"] * e["size"] / size
+                    weights[name] = weights.get(name, 0) + share
+                    colors[name] = e["node"]["color"]
 
     return {
-        "repos": repos["totalCount"],
-        "stars": total_stars,
-        "commits": total_commits,
-        "languages": languages,
+        "stars": sum(r["stargazerCount"] for r in user["public"]["nodes"]),
+        "contributions": contributions,
+        "commits_year": commits_year,
+        "prs_merged": user["pullRequests"]["totalCount"],
+        "hidden": hidden,
+        "languages": [(name, pct, colors.get(name)) for name, pct in percent_rows(weights)],
     }
 
 
-def update_svg(filepath: str, stats: dict) -> None:
-    """Update an SVG file with fresh stats using regex (preserves formatting)."""
-    with open(filepath, "r", encoding="utf-8") as f:
-        svg = f.read()
-
-    def set_text(svg: str, element_id: str, value: str) -> str:
-        """Replace text content of a <text id="...">...</text> element."""
-        pattern = rf'(id="{element_id}"[^>]*>)[^<]*(</text>)'
-        return re.sub(pattern, rf"\g<1>{value}\2", svg)
-
-    def set_rect_width(svg: str, element_id: str, width: float) -> str:
-        """Replace width attribute of a <rect id="..."> element."""
-        w = str(max(3, int(width)))
-        pattern = rf'(id="{element_id}"[^>]*\bwidth=")[^"]*(")'
-        result = re.sub(pattern, rf"\g<1>{w}\2", svg)
-        if result == svg:
-            # id might appear before width in the attributes
-            pattern = rf'(<rect[^>]*\bwidth=")([^"]*)"([^>]*id="{element_id}")'
-            result = re.sub(pattern, rf'\g<1>{w}"\3', svg)
-        return result
-
-    # Update stats text
-    svg = set_text(svg, "repos_data", str(stats["repos"]))
-    svg = set_text(svg, "stars_data", str(stats["stars"]))
-    svg = set_text(svg, "commits_data", str(stats["commits"]))
-
-    # Update language bars and percentages
-    lang_ids = [
-        ("rust_bar", "rust_pct"),
-        ("python_bar", "python_pct"),
-        ("other_bar", "other_pct"),
-    ]
-    for i, (bar_id, pct_id) in enumerate(lang_ids):
-        if i < len(stats["languages"]):
-            lang = stats["languages"][i]
-            svg = set_text(svg, pct_id, f"{lang['pct']}%")
-            svg = set_rect_width(svg, bar_id, lang["pct"] / 100 * BAR_MAX_WIDTH)
-        else:
-            svg = set_text(svg, pct_id, "0%")
-            svg = set_rect_width(svg, bar_id, 3)
-
-    with open(filepath, "w", encoding="utf-8") as f:
-        f.write(svg)
+def lang_rows(languages: list, palette: dict) -> str:
+    rows = []
+    per_column = -(-len(languages) // 2)
+    for i, (name, pct, color) in enumerate(languages):
+        x, y = i // per_column * LANG_COLUMN, i % per_column * 20
+        width = max(3, round(pct / 100 * BAR_WIDTH))
+        label = name if len(name) <= NAME_MAX else name[: NAME_MAX - 1] + "…"
+        rows.append(
+            f'<rect x="{x}" y="{y}" width="{BAR_WIDTH}" height="10" rx="3" fill="{palette["track"]}" />'
+            f'<rect x="{x}" y="{y}" width="{width}" height="10" rx="3" fill="{color or palette["muted"]}" />'
+            f'<text x="{x + 160}" y="{y + 10}" font-size="12" fill="{palette["fg"]}">{escape(label)}</text>'
+            f'<text x="{x + 285}" y="{y + 10}" font-size="12" fill="{palette["muted"]}">{pct or "&lt;1"}%</text>'
+        )
+    return "\n    ".join(rows)
 
 
 def main():
-    if not GITHUB_TOKEN:
-        print("GITHUB_TOKEN not set — using placeholder values")
-        stats = {
-            "repos": "—",
-            "stars": "—",
-            "commits": "—",
-            "languages": [],
-        }
-    else:
-        print(f"Fetching stats for {USERNAME}...")
-        stats = fetch_stats()
-        # Apply hardcoded overrides
-        for key, val in OVERRIDES.items():
-            if val is not None:
-                stats[key] = val
-        print(f"  Repos: {stats['repos']}")
-        print(f"  Stars: {stats['stars']}")
-        print(f"  Commits: {stats['commits']}")
-        for lang in stats["languages"]:
-            print(f"  {lang['name']}: {lang['pct']}%")
+    if not TOKEN:
+        sys.exit("GITHUB_TOKEN not set")
+    stats = fetch_stats()
+    languages = stats.pop("languages")
+    print(stats)
+    for name, pct, _ in languages:
+        print(f"  {name}: {pct}%")
 
-    for svg in SVG_FILES:
-        if os.path.exists(svg):
-            update_svg(svg, stats)
-            print(f"Updated {svg}")
-        else:
-            print(f"Skipped {svg} (not found)")
+    template = Template((ROOT / "template.svg").read_text(encoding="utf-8"))
+    numbers = {key: f"{value:,}" for key, value in stats.items()}
+    cards = {
+        filename: template.substitute(palette | numbers, lang_rows=lang_rows(languages, palette))
+        for filename, palette in PALETTES.items()
+    }
+    for filename, svg in cards.items():
+        (ROOT / filename).write_text(svg, encoding="utf-8")
+        print(f"wrote {filename}")
 
 
 if __name__ == "__main__":

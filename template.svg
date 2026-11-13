@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="736" viewBox="0 0 850 736">
+  <style>
+    text { font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
+  </style>
+
+  <rect width="850" height="736" rx="10" fill="$bg" stroke="$border" stroke-width="1" />
+
+  <rect width="850" height="36" rx="10" fill="$titlebar" />
+  <rect x="0" y="26" width="850" height="10" fill="$titlebar" />
+  <line x1="0" y1="36" x2="850" y2="36" stroke="$border" stroke-width="1" />
+  <text x="786" y="24" font-size="16" fill="$muted">─</text>
+  <text x="806" y="23" font-size="14" fill="$muted">□</text>
+  <text x="826" y="24" font-size="16" fill="$close">✕</text>
+  <text x="425" y="23" text-anchor="middle" font-size="12" fill="$muted">david@netviper.gr — bash</text>
+
+  <text font-size="14" fill="$green" xml:space="preserve">
+    <tspan x="30" y="56">@@@  @@@  @@@@@@@@  @@@@@@@  @@@  @@@  @@@  @@@@@@@   @@@@@@@@  @@@@@@@</tspan>
+    <tspan x="30" y="72">@@@@ @@@  @@@@@@@@  @@@@@@@  @@@  @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@@@@@</tspan>
+    <tspan x="30" y="88">@@!@!@@@  @@!         @@!    @@!  @@@  @@!  @@!  @@@  @@!       @@!  @@@</tspan>
+    <tspan x="30" y="104">!@!!@!@!  !@!         !@!    !@!  @!@  !@!  !@!  @!@  !@!       !@!  @!@</tspan>
+    <tspan x="30" y="120">@!@ !!@!  @!!!:!      @!!    @!@  !@!  !!@  @!@@!@!   @!!!:!    @!@!!@!</tspan>
+    <tspan x="30" y="136">!@!  !!!  !!!!!:      !!!    !@!  !!!  !!!  !!@!!!    !!!!!:    !!@!@!</tspan>
+    <tspan x="30" y="152">!!:  !!!  !!:         !!:    :!:  !!:  !!:  !!:       !!:       !!: :!!</tspan>
+    <tspan x="30" y="168">:!:  !:!  :!:         :!:     ::!!:!   :!:  :!:       :!:       :!:  !:!</tspan>
+    <tspan x="30" y="184"> ::   ::   :: ::::     ::      ::::     ::   ::        :: ::::  ::   :::</tspan>
+    <tspan x="30" y="200">::    :   : :: ::      :        :      :     :        : :: ::    :   : :</tspan>
+  </text>
+
+  <text x="30" y="224" font-size="13" fill="$muted">Building the infrastructure AI systems are missing</text>
+
+  <text x="30" y="248" font-size="14" font-weight="bold" fill="$accent">david<tspan fill="$fg" font-weight="normal">@</tspan>netviper.gr</text>
+  <text x="30" y="266" font-size="14" fill="$border">──────────────────────────────────────────</text>
+  <text x="30" y="286" font-size="14" fill="$key">Background</text>
+  <text x="145" y="286" font-size="14" fill="$fg">USMC Veteran</text>
+  <text x="30" y="304" font-size="14" fill="$key">Location</text>
+  <text x="145" y="304" font-size="14" fill="$fg">Athens, Greece</text>
+
+  <text x="30" y="338" font-size="14" font-weight="bold" fill="$accent">What I do</text>
+  <text x="30" y="356" font-size="14" fill="$border">──────────────────────────────────────────</text>
+  <text x="30" y="376" font-size="14" fill="$key">Systems</text>
+  <text x="145" y="376" font-size="14" fill="$fg">Low-latency Rust · GPU compute</text>
+  <text x="30" y="394" font-size="14" fill="$key">AI infra</text>
+  <text x="145" y="394" font-size="14" fill="$fg">ML systems · agent tooling · checks for AI-assisted development</text>
+  <text x="30" y="412" font-size="14" fill="$key">Product</text>
+  <text x="145" y="412" font-size="14" fill="$fg">Web and native apps · TypeScript · Svelte · Python</text>
+
+  <text x="30" y="446" font-size="14" font-weight="bold" fill="$accent">Building</text>
+  <text x="30" y="464" font-size="14" fill="$border">──────────────────────────────────────────</text>
+  <text x="30" y="484" font-size="14" fill="$green">jtac</text>
+  <text x="80" y="484" font-size="14" fill="$muted">—</text>
+  <text x="100" y="484" font-size="14" fill="$fg">Signed pre-push gate for AI-assisted development</text>
+  <text x="30" y="502" font-size="14" fill="$green">Kaio</text>
+  <text x="80" y="502" font-size="14" fill="$muted">—</text>
+  <text x="100" y="502" font-size="14" fill="$fg">Rust-native GPU kernels, compiled to PTX</text>
+
+  <text x="30" y="536" font-size="14" font-weight="bold" fill="$accent">GitHub</text>
+  <text x="30" y="554" font-size="14" fill="$border">──────────────────────────────────────────</text>
+  <text x="30" y="574" font-size="14" fill="$key" xml:space="preserve">Contributions <tspan fill="$fg">$contributions</tspan><tspan fill="$muted"> all time</tspan>   Commits <tspan fill="$fg">$commits_year</tspan><tspan fill="$muted"> this year</tspan>   PRs merged <tspan fill="$fg">$prs_merged</tspan>   Stars <tspan fill="$fg">$stars</tspan></text>
+  <text x="30" y="598" font-size="12" fill="$muted">Languages, weighted by commits across public and private repos</text>
+  <g transform="translate(30 610)">$lang_rows</g>
+</svg>

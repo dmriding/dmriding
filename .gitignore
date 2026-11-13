@@ -2,3 +2,6 @@
 __pycache__/
 *.pyc
 cache/
+.nyx/
+dark_mode.svg
+light_mode.svg
