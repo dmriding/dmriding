@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
     steps:
       # STATS_TOKEN can write to every repo: no tag-pinned or third-party action in this job.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -37,3 +38,10 @@ jobs:
               -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
               commit -qm 'chore: update stats'
           git push -f origin stats
+
+      # GitHub disables a public repo's schedule after 60 days without activity, and main is quiet now.
+      - name: Keep the schedule enabled
+        if: always()
+        run: gh workflow enable update-readme.yml
+        env:
+          GH_TOKEN: ${{ github.token }}
