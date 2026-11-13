@@ -136,15 +136,14 @@ def fetch_stats() -> dict:
     if data["viewer"]["login"].lower() != USERNAME.lower():
         sys.exit(f"GITHUB_TOKEN does not belong to {USERNAME}")
     user = data["user"]
-    contributions, commits_year, hidden, weights, colors = 0, 0, 0, {}, {}
+    contributions, commits, hidden, weights, colors = 0, 0, 0, {}, {}
     this_year = datetime.now(timezone.utc).year
     for year in range(int(user["createdAt"][:4]), this_year + 1):
         start = datetime(year, 1, 1, tzinfo=timezone.utc)
         for coll in commit_windows(start, start.replace(year=year + 1)):
             contributions += coll["contributionCalendar"]["totalContributions"]
             hidden += coll["restrictedContributionsCount"]
-            if year == this_year:
-                commits_year += coll["totalCommitContributions"]
+            commits += coll["totalCommitContributions"]
             for entry in coll["commitContributionsByRepository"]:
                 # A repo's commits are split across its languages by byte share.
                 edges = entry["repository"]["languages"]["edges"]
@@ -160,7 +159,7 @@ def fetch_stats() -> dict:
     return {
         "stars": sum(r["stargazerCount"] for r in user["public"]["nodes"]),
         "contributions": contributions,
-        "commits_year": commits_year,
+        "commits": commits,
         "prs_merged": user["pullRequests"]["totalCount"],
         "hidden": hidden,
         "languages": [(name, pct, colors.get(name)) for name, pct in percent_rows(weights)],

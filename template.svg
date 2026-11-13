@@ -55,7 +55,7 @@
 
   <text x="30" y="536" font-size="14" font-weight="bold" fill="$accent">GitHub</text>
   <text x="30" y="554" font-size="14" fill="$border">──────────────────────────────────────────</text>
-  <text x="30" y="574" font-size="14" fill="$key" xml:space="preserve">Contributions <tspan fill="$fg">$contributions</tspan><tspan fill="$muted"> all time</tspan>   Commits <tspan fill="$fg">$commits_year</tspan><tspan fill="$muted"> this year</tspan>   PRs merged <tspan fill="$fg">$prs_merged</tspan>   Stars <tspan fill="$fg">$stars</tspan></text>
+  <text x="30" y="574" font-size="14" fill="$key" xml:space="preserve">Contributions <tspan fill="$fg">$contributions</tspan>   Commits <tspan fill="$fg">$commits</tspan>   PRs merged <tspan fill="$fg">$prs_merged</tspan>   Stars <tspan fill="$fg">$stars</tspan></text>
   <text x="30" y="598" font-size="12" fill="$muted">Languages, weighted by commits across public and private repos</text>
   <g transform="translate(30 610)">$lang_rows</g>
 </svg>
