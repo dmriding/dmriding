@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="736" viewBox="0 0 850 736">
+  <style>
+    text { font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
+  </style>
+
+  <rect width="850" height="736" rx="10" fill="#ffffff" stroke="#d0d7de" stroke-width="1" />
+
+  <rect width="850" height="36" rx="10" fill="#f6f8fa" />
+  <rect x="0" y="26" width="850" height="10" fill="#f6f8fa" />
+  <line x1="0" y1="36" x2="850" y2="36" stroke="#d0d7de" stroke-width="1" />
+  <text x="786" y="24" font-size="16" fill="#656d76">─</text>
+  <text x="806" y="23" font-size="14" fill="#656d76">□</text>
+  <text x="826" y="24" font-size="16" fill="#f85149">✕</text>
+  <text x="425" y="23" text-anchor="middle" font-size="12" fill="#656d76">david@netviper.gr — bash</text>
+
+  <text font-size="14" fill="#1a7f37" xml:space="preserve">
+    <tspan x="30" y="56">@@@  @@@  @@@@@@@@  @@@@@@@  @@@  @@@  @@@  @@@@@@@   @@@@@@@@  @@@@@@@</tspan>
+    <tspan x="30" y="72">@@@@ @@@  @@@@@@@@  @@@@@@@  @@@  @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@@@@@</tspan>
+    <tspan x="30" y="88">@@!@!@@@  @@!         @@!    @@!  @@@  @@!  @@!  @@@  @@!       @@!  @@@</tspan>
+    <tspan x="30" y="104">!@!!@!@!  !@!         !@!    !@!  @!@  !@!  !@!  @!@  !@!       !@!  @!@</tspan>
+    <tspan x="30" y="120">@!@ !!@!  @!!!:!      @!!    @!@  !@!  !!@  @!@@!@!   @!!!:!    @!@!!@!</tspan>
+    <tspan x="30" y="136">!@!  !!!  !!!!!:      !!!    !@!  !!!  !!!  !!@!!!    !!!!!:    !!@!@!</tspan>
+    <tspan x="30" y="152">!!:  !!!  !!:         !!:    :!:  !!:  !!:  !!:       !!:       !!: :!!</tspan>
+    <tspan x="30" y="168">:!:  !:!  :!:         :!:     ::!!:!   :!:  :!:       :!:       :!:  !:!</tspan>
+    <tspan x="30" y="184"> ::   ::   :: ::::     ::      ::::     ::   ::        :: ::::  ::   :::</tspan>
+    <tspan x="30" y="200">::    :   : :: ::      :        :      :     :        : :: ::    :   : :</tspan>
+  </text>
+
+  <text x="30" y="224" font-size="13" fill="#656d76">Building the infrastructure AI systems are missing</text>
+
+  <text x="30" y="248" font-size="14" font-weight="bold" fill="#bf3100">david<tspan fill="#1f2328" font-weight="normal">@</tspan>netviper.gr</text>
+  <text x="30" y="266" font-size="14" fill="#d0d7de">──────────────────────────────────────────</text>
+  <text x="30" y="286" font-size="14" fill="#0550ae">Background</text>
+  <text x="145" y="286" font-size="14" fill="#1f2328">USMC Veteran</text>
+  <text x="30" y="304" font-size="14" fill="#0550ae">Location</text>
+  <text x="145" y="304" font-size="14" fill="#1f2328">Athens, Greece</text>
+
+  <text x="30" y="338" font-size="14" font-weight="bold" fill="#bf3100">What I do</text>
+  <text x="30" y="356" font-size="14" fill="#d0d7de">──────────────────────────────────────────</text>
+  <text x="30" y="376" font-size="14" fill="#0550ae">Systems</text>
+  <text x="145" y="376" font-size="14" fill="#1f2328">Low-latency Rust · GPU compute</text>
+  <text x="30" y="394" font-size="14" fill="#0550ae">AI infra</text>
+  <text x="145" y="394" font-size="14" fill="#1f2328">ML systems · agent tooling · checks for AI-assisted development</text>
+  <text x="30" y="412" font-size="14" fill="#0550ae">Product</text>
+  <text x="145" y="412" font-size="14" fill="#1f2328">Web and native apps · TypeScript · Svelte · Python</text>
+
+  <text x="30" y="446" font-size="14" font-weight="bold" fill="#bf3100">Building</text>
+  <text x="30" y="464" font-size="14" fill="#d0d7de">──────────────────────────────────────────</text>
+  <text x="30" y="484" font-size="14" fill="#1a7f37">jtac</text>
+  <text x="80" y="484" font-size="14" fill="#656d76">—</text>
+  <text x="100" y="484" font-size="14" fill="#1f2328">Signed pre-push gate for AI-assisted development</text>
+  <text x="30" y="502" font-size="14" fill="#1a7f37">Kaio</text>
+  <text x="80" y="502" font-size="14" fill="#656d76">—</text>
+  <text x="100" y="502" font-size="14" fill="#1f2328">Rust-native GPU kernels, compiled to PTX</text>
+
+  <text x="30" y="536" font-size="14" font-weight="bold" fill="#bf3100">GitHub</text>
+  <text x="30" y="554" font-size="14" fill="#d0d7de">──────────────────────────────────────────</text>
+  <text x="30" y="574" font-size="14" fill="#0550ae" xml:space="preserve">Contributions <tspan fill="#1f2328">11,292</tspan>   Commits <tspan fill="#1f2328">7,702</tspan>   PRs merged <tspan fill="#1f2328">1,241</tspan>   Stars <tspan fill="#1f2328">102</tspan></text>
+  <text x="30" y="598" font-size="12" fill="#656d76">Languages, weighted by commits across public and private repos</text>
+  <g transform="translate(30 610)"><rect x="0" y="0" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="0" y="0" width="63" height="10" rx="3" fill="#dea584" /><text x="160" y="10" font-size="12" fill="#1f2328">Rust</text><text x="285" y="10" font-size="12" fill="#656d76">42%</text>
+    <rect x="0" y="20" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="0" y="20" width="42" height="10" rx="3" fill="#3178c6" /><text x="160" y="30" font-size="12" fill="#1f2328">TypeScript</text><text x="285" y="30" font-size="12" fill="#656d76">28%</text>
+    <rect x="0" y="40" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="0" y="40" width="18" height="10" rx="3" fill="#3572A5" /><text x="160" y="50" font-size="12" fill="#1f2328">Python</text><text x="285" y="50" font-size="12" fill="#656d76">12%</text>
+    <rect x="0" y="60" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="0" y="60" width="9" height="10" rx="3" fill="#f1e05a" /><text x="160" y="70" font-size="12" fill="#1f2328">JavaScript</text><text x="285" y="70" font-size="12" fill="#656d76">6%</text>
+    <rect x="0" y="80" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="0" y="80" width="4" height="10" rx="3" fill="#e34c26" /><text x="160" y="90" font-size="12" fill="#1f2328">HTML</text><text x="285" y="90" font-size="12" fill="#656d76">3%</text>
+    <rect x="0" y="100" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="0" y="100" width="3" height="10" rx="3" fill="#F05138" /><text x="160" y="110" font-size="12" fill="#1f2328">Swift</text><text x="285" y="110" font-size="12" fill="#656d76">2%</text>
+    <rect x="400" y="0" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="400" y="0" width="3" height="10" rx="3" fill="#89e051" /><text x="560" y="10" font-size="12" fill="#1f2328">Shell</text><text x="685" y="10" font-size="12" fill="#656d76">2%</text>
+    <rect x="400" y="20" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="400" y="20" width="3" height="10" rx="3" fill="#663399" /><text x="560" y="30" font-size="12" fill="#1f2328">CSS</text><text x="685" y="30" font-size="12" fill="#656d76">1%</text>
+    <rect x="400" y="40" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="400" y="40" width="3" height="10" rx="3" fill="#844FBA" /><text x="560" y="50" font-size="12" fill="#1f2328">HCL</text><text x="685" y="50" font-size="12" fill="#656d76">1%</text>
+    <rect x="400" y="60" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="400" y="60" width="3" height="10" rx="3" fill="#336790" /><text x="560" y="70" font-size="12" fill="#1f2328">PLpgSQL</text><text x="685" y="70" font-size="12" fill="#656d76">1%</text>
+    <rect x="400" y="80" width="150" height="10" rx="3" fill="#eaeef2" /><rect x="400" y="80" width="3" height="10" rx="3" fill="#656d76" /><text x="560" y="90" font-size="12" fill="#1f2328">Other</text><text x="685" y="90" font-size="12" fill="#656d76">2%</text></g>
+</svg>
